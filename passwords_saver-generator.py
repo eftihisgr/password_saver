@@ -7,9 +7,9 @@ import string
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Prompt the user for their choice
-choice = input("Do you want to save an existing password (enter 'existing') or generate a random one (enter 'random')? ").lower()
+choice = input("Do you want to save an existing password (enter 'e') or generate a random one (enter 'r')? ").lower()
 
-if choice == 'existing':
+if choice == "e":
     # Prompt the user for the domain
     domain = input("Enter the domain: ")
 
@@ -18,7 +18,7 @@ if choice == 'existing':
 
     # Prompt the user for an existing password
     password = input("Enter your existing password: ")
-elif choice == 'random':
+elif choice == "r":
     # Prompt the user for the domain
     domain = input("Enter the domain: ")
 
@@ -33,11 +33,12 @@ elif choice == 'random':
 
     special_characters = ""
     if include_special_characters == "yes":
-        special_characters = "!@"
+        special_characters = "!@#$%"
 
     # Generate a random password with or without special characters
     characters = string.ascii_letters + string.digits + special_characters
     password = ''.join(random.choice(characters) for _ in range(password_length))
+    print("Your generated password is: ", password)
 else:
     print("Invalid choice. Please enter 'existing' or 'random'.")
     exit(1)
@@ -49,4 +50,4 @@ passwords_file = os.path.join(script_dir, "myPasswords.txt")
 with open(passwords_file, "a") as file:
     file.write(f"Domain: {domain}\nUsername: {username}\nPassword: {password}\n{'-' * 35}\n")
 
-print(f"Data saved to '{passwords_file}'.")
+print(f"-------------------------------------------------\nData saved to '{passwords_file}'.")
